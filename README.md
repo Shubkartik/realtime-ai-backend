@@ -51,7 +51,9 @@ pip install -r requirements.txt
 Create a .env file in the root of the project:
 # .env
 OPENAI_API_KEY=your_key_here
+
 SUPABASE_URL=https://xxxx.supabase.co
+
 SUPABASE_KEY=your_service_role_key
 
 
@@ -60,6 +62,7 @@ SUPABASE_KEY=your_service_role_key
 Run the following SQL in your Supabase SQL editor:
 
 -- Main session table
+
 CREATE TABLE sessions (
     session_id UUID PRIMARY KEY,
     user_id TEXT,
@@ -70,6 +73,7 @@ CREATE TABLE sessions (
 );
 
 -- Event log table
+
 CREATE TABLE session_events (
     id SERIAL PRIMARY KEY,
     session_id UUID REFERENCES sessions(session_id),
@@ -124,26 +128,8 @@ Post-session processing: Generates a concise session summary on disconnect
 
 Graceful fallback: Handles OpenAI quota errors without crashing the server
 
-## 5. Project Structure
 
-realtime-ai-backend/
-│
-├── app/
-│   ├── __init__.py
-│   ├── main.py
-│   ├── websocket.py
-│   ├── llm.py
-│   ├── summary.py
-│   ├── db.py
-│
-├── frontend/
-│   └── index.html
-│
-├── .env
-├── requirements.txt
-└── README.md
-
-## 6. requirements.txt
+## 5. requirements.txt
 
 fastapi
 uvicorn
@@ -152,8 +138,8 @@ supabase
 openai
 websockets
 
-## 8. .env.example
-# Rename to .env and fill in your own keys
+## 6. .env.example
+### Rename to .env and fill in your own keys
 
 OPENAI_API_KEY=your_openai_api_key_here
 SUPABASE_URL=your_supabase_project_url_here
