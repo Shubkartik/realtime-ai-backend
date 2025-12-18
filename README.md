@@ -64,6 +64,7 @@ Run the following SQL in your Supabase SQL editor:
 -- Main session table
 
 CREATE TABLE sessions (
+
     session_id UUID PRIMARY KEY,
     user_id TEXT,
     start_time TIMESTAMP DEFAULT NOW(),
