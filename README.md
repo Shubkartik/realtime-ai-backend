@@ -27,44 +27,50 @@ It demonstrates:
 ## 1. Detailed Setup Steps and Required Dependencies
 
 ### 1. Clone the repository
-
+```bash
 git clone <YOUR_REPO_URL>
 cd realtime-ai-backend
+```
 
 ### 2. Create a virtual environment
-
+```bash
 python -m venv venv
+```
 
 ### 3. Activate virtual environment
 
 Windows :
+```bash
 venv\Scripts\activate
-
-Mac/Linux:
+```
+Mac/Linux
+```bash
 source venv/bin/activate
+```
 
 ### 4. Install dependencies
-
+```bash
 pip install -r requirements.txt
+```
 
 ### 5. Configure environment variables
 Create a .env file in the root of the project:
-# .env
+### .env
+```bash
 OPENAI_API_KEY=your_key_here
 
 SUPABASE_URL=https://xxxx.supabase.co
 
 SUPABASE_KEY=your_service_role_key
-
+```
 
 ## 2. Supabase Database Schema
 
 Run the following SQL in your Supabase SQL editor:
-
+```bash
 -- Main session table
 
 CREATE TABLE sessions (
-
     session_id UUID PRIMARY KEY,
     user_id TEXT,
     start_time TIMESTAMP DEFAULT NOW(),
@@ -82,66 +88,67 @@ CREATE TABLE session_events (
     content TEXT,
     created_at TIMESTAMP DEFAULT NOW()
 );
-
+```
 ## 3. How to Run and Test the WebSocket Server
 
 ### 1. Start FastAPI server
-
+```bash
 uvicorn app.main:app --reload
-
+```
 Server will run at: http://127.0.0.1:8000
 
 ### 2. Open frontend for testing
 
-Open frontend/index.html in a browser.
+- Open frontend/index.html in a browser.
 
-Click Start Session → generates a session ID and opens a WebSocket
+- Click Start Session → generates a session ID and opens a WebSocket
 
-Type a message in the input field → click Send
+- Type a message in the input field → click Send
 
-Messages from the LLM will stream in real-time
+- Messages from the LLM will stream in real-time
 
-When you close the tab, a session summary is automatically generated in Supabase
+- When you close the tab, a session summary is automatically generated in Supabase
 
 ### 3. Test function/tool calling
 
 Type a message like:   fetch internal user analytics
 
-Expected behavior:
+ Expected behavior:
 
-Tool call detected
+- Tool call detected
 
-Tool executed internally
+- Tool executed internally
 
-Response injected back into conversation stream
+- Response injected back into conversation stream
 
 ## 4. Key Design Choices
 
-WebSockets: Provides low-latency streaming between frontend and backend
+- WebSockets: Provides low-latency streaming between frontend and backend
 
-State management: Message history maintained for multi-turn conversations
+- State management: Message history maintained for multi-turn conversations
 
-Function/Tool calling: Demonstrates complex LLM workflows
+- Function/Tool calling: Demonstrates complex LLM workflows
 
-Supabase: Persistent storage for sessions and event logs
+- Supabase: Persistent storage for sessions and event logs
 
-Post-session processing: Generates a concise session summary on disconnect
+- Post-session processing: Generates a concise session summary on disconnect
 
-Graceful fallback: Handles OpenAI quota errors without crashing the server
+- Graceful fallback: Handles OpenAI quota errors without crashing the server
 
 
 ## 5. requirements.txt
-
+```bash
 fastapi
 uvicorn
 python-dotenv
 supabase
 openai
 websockets
-
+```
 ## 6. .env.example
 ### Rename to .env and fill in your own keys
-
+```bash
 OPENAI_API_KEY=your_openai_api_key_here
 SUPABASE_URL=your_supabase_project_url_here
 SUPABASE_KEY=your_service_role_key
+```
