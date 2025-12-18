@@ -27,36 +27,38 @@ It demonstrates:
 ## 1. Detailed Setup Steps and Required Dependencies
 
 ### 1. Clone the repository
-```bash
-git clone <YOUR_REPO_URL>
+```
+git clone https://github.com/Shubkartik/realtime-ai-backend.git
+```
+```
 cd realtime-ai-backend
 ```
 
 ### 2. Create a virtual environment
-```bash
+```
 python -m venv venv
 ```
 
 ### 3. Activate virtual environment
 
 Windows :
-```bash
+```
 venv\Scripts\activate
 ```
 Mac/Linux
-```bash
+```
 source venv/bin/activate
 ```
 
 ### 4. Install dependencies
-```bash
+```
 pip install -r requirements.txt
 ```
 
 ### 5. Configure environment variables
 Create a .env file in the root of the project:
 ### .env
-```bash
+```
 OPENAI_API_KEY=your_key_here
 
 SUPABASE_URL=https://xxxx.supabase.co
@@ -67,7 +69,7 @@ SUPABASE_KEY=your_service_role_key
 ## 2. Supabase Database Schema
 
 Run the following SQL in your Supabase SQL editor:
-```bash
+```
 -- Main session table
 
 CREATE TABLE sessions (
@@ -92,7 +94,7 @@ CREATE TABLE session_events (
 ## 3. How to Run and Test the WebSocket Server
 
 ### 1. Start FastAPI server
-```bash
+```
 uvicorn app.main:app --reload
 ```
 Server will run at: http://127.0.0.1:8000
@@ -137,7 +139,7 @@ Type a message like:   fetch internal user analytics
 
 
 ## 5. requirements.txt
-```bash
+```
 fastapi
 uvicorn
 python-dotenv
@@ -147,7 +149,7 @@ websockets
 ```
 ## 6. .env.example
 ### Rename to .env and fill in your own keys
-```bash
+```
 OPENAI_API_KEY=your_openai_api_key_here
 SUPABASE_URL=your_supabase_project_url_here
 SUPABASE_KEY=your_service_role_key
