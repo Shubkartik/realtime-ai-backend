@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Realtime AI WebSocket</title>
+</head>
+<body>
+
+<button onclick="connect()">Start Session</button><br><br>
+
+<input id="msg" placeholder="Type message..." />
+<button onclick="send()">Send</button>
+
+<pre id="chat"></pre>
+
+<script>
+let ws;
+const chat = document.getElementById("chat");
+const msg = document.getElementById("msg");
+
+function connect() {
+  ws = new WebSocket(
+    "ws://localhost:8000/ws/session/" + crypto.randomUUID()
+  );
+
+  ws.onopen = () => {
+    chat.textContent += "\n[Connected]\n";
+  };
+
+  ws.onmessage = (e) => {
+    chat.textContent += e.data;
+  };
+
+  ws.onclose = () => {
+    chat.textContent += "\n\n[Session Ended]\n";
+  };
+}
+
+function send() {
+  if (!ws || ws.readyState !== WebSocket.OPEN) {
+    alert("Connect first!");
+    return;
+  }
+
+  chat.textContent += "\n\nYou: " + msg.value + "\nAI: ";
+  ws.send(msg.value);
+  msg.value = "";
+}
+</script>
+
+</body>
+</html>
